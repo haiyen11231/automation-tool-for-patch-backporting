@@ -3,3 +3,8 @@ uvicorn
 transformers 
 gitpython 
 python-dotenv
+jsonpatch
+huggingface_hub
+torch 
+tensorflow 
+flax
