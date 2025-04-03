@@ -8,3 +8,5 @@ huggingface_hub
 torch 
 tensorflow 
 flax
+pytest
+

@@ -96,3 +96,20 @@ Applying [patch](https://github.com/Pylons/waitress/commit/e4359018537af376cf24b
 7. [CVE-2024-47532](https://nvd.nist.gov/vuln/detail/CVE-2024-47532)
 
 Applying [patch](https://github.com/zopefoundation/RestrictedPython/commit/d701cc36cccac36b21fa200f1f2d1945a9a215e6) from version 7.3 to [7.0](https://github.com/zopefoundation/RestrictedPython/tree/7.0)
+
+## Flow of Request Diagram
+
+```mermaid
+graph TB;
+    A[User] -->|Sends Backport Request| B[FastAPI Backend]
+    B -->|Fetch Patch| C[Patch Service]
+    C -->|Extract Modified Files & Patches| D[LLM Service]
+    D -->|Modify Patch for Target Version| E[Adapted Patch]
+    E -->|Apply Patches to Repo| F[Patch Service]
+    F -->|Run Tests| G[Pytest]
+
+    %% Styling %%
+    classDef lightRed fill:#FFDDDD,stroke:#CC0000,stroke-width:2px;
+    class A,B,C,D,E,F,G lightRed;
+
+```

@@ -10,16 +10,29 @@ def fetch_patch(repo_url: str, commit_hash: str):
     """
     repo_path = "/tmp/repo"
 
-    if os.path.exists(repo_path):
-        repo = git.Repo(repo_path)
-        repo.remotes.origin.pull()
-    else:
+    # Clone the repo if not exists
+    if not os.path.exists(repo_path):
         repo = git.Repo.clone_from(repo_url, repo_path)
+
+    repo = git.Repo(repo_path)
+
+    # Fetch latest changes
+    repo.remotes.origin.fetch()
+
+    # Check if the target_version is a branch or tag
+    if target_version in repo.tags:
+        repo.git.checkout(target_version)  # It's a tag
+    elif target_version in repo.branches:
+        repo.git.checkout(target_version)  # It's a branch
+    else:
+        raise ValueError(f"Target version '{target_version}' is neither a known branch nor a tag.")
+
+    # Pull latest changes for that version
+    repo.remotes.origin.pull()
 
     # Get diff only for Python files
     diff_output = repo.git.diff(commit_hash + "^!", "--", "*.py")
 
-    # Split the diff into per-file sections
     patches = {}
     current_file = None
     current_patch = []
