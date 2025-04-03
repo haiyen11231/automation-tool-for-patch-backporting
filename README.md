@@ -1,6 +1,6 @@
 # Automation Tool for Patch Backporting
 
-This is an automated tool that integrates the LLM to suggest and apply patches to Python open source project in older versions. Using [FastAPI](https://fastapi.tiangolo.com/#installation), it interacts with a [starcoder](https://huggingface.co/bigcode/starcoder) model database to securely store and retrieve payment information without requiring raw SQL queries.
+This is an automated tool that integrates the LLM to suggest and apply patches to older versions in Python open source projects. Using [FastAPI](https://fastapi.tiangolo.com/#installation) with [starcoder](https://huggingface.co/bigcode/starcoder) model from [Hugging Face](https://huggingface.co/).
 
 ## Project Structure
 
